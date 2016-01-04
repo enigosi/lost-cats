@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>cats</title>
+    <script src="cats_helpers.js"></script>
+    <script src="cats.js"></script>
+  </head>
+  <body>
+
+  	<form>
+  		<input value="100" type="number" name="lostCatsNum" />
+  		<input value="Start search" type="button" name="startSearch" />
+  	</form>
+
+  	<p>Output will be printed to console</p>
+
+  	<script type="text/javascript">
+  		var valueElem = document.getElementsByName("lostCatsNum")[0];
+  		var actionElem = document.getElementsByName("startSearch")[0];
+
+  		actionElem.onclick = startSearch;
+
+  		function startSearch() {
+  			findCats(valueElem.value);
+        return false;
+  		}
+
+  	</script>
+  </body>
+</html>
