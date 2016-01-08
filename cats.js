@@ -137,23 +137,12 @@ function findCats(lostCatsNum) {
 		var catLastMove;
 		var ownerLastMove;
 
-		// found and stuck to remove at the end of the iteration
-		var toRemove = [];
-
-
-		pairs.map(function(pair, i) {
+		pairs = pairs.map(function(pair) {
 
 			catLastMove = pair.cat.makeMove();
 			ownerLastMove = pair.owner.makeMove();
 
-			// cat or owner stucked
-			if (catLastMove === false || ownerLastMove === false ) {
-
-				// we are excluding stucked pairs from search
-				toRemove.push(i);
-
-			// cat and owner on same station
-			} else if (catLastMove === ownerLastMove) {
+			if (catLastMove !== false && catLastMove === ownerLastMove) {
 
 				console.log('Owner ' + pair.owner.name + ' found cat ' + pair.cat.name + ' - ' + stations[pair.owner.position].name + ' is now closed');
 
@@ -162,25 +151,11 @@ function findCats(lostCatsNum) {
 				// love is blocking station
 				blockedStations.push(pair.owner.position);
 
-				// we are excluding matched pairs from search
-				toRemove.push(i);
-
+				return pairs;
 			}
 		});
 
-		// clean array at the end of the iteration
-		if(toRemove.length) removeFoundAndStucked(toRemove);
 	}
-
-
-
-	function removeFoundAndStucked(toRemove) {
-
-		toRemove.map(function(toRemove , i) {
-			pairs.splice(toRemove - i, 1);
-		});
-	}
-
 
 
 	/////////////////////////////////////////
